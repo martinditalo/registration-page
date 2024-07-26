@@ -476,7 +476,7 @@ hr {
 @media only screen and (max-width: 600px) {
   html,
   body {
-    height: 1900px;
+    height: 1900px !important;
   }
   .reg-container {
     height: 1250px;
