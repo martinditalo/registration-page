@@ -24,7 +24,7 @@ export default {
   css: ['quasar/dist/quasar.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/quasar'],
+  plugins: ['@/plugins/quasar', '@/plugins/vee-validate.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -39,6 +39,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -50,5 +51,36 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['quasar'],
+  },
+  auth: {
+    strategies: {
+      google: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://accounts.google.com/o/oauth2/v2/auth',
+          token: 'https://oauth2.googleapis.com/token',
+          userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo',
+          logout: 'https://accounts.google.com/logout',
+        },
+        codeChallengeMethod: '',
+        responseType: 'token id_token',
+        redirectUri: 'http://localhost:3000/auth/callback',
+        clientId: 'YOUR_GOOGLE_CLIENT_ID', // replace with your Google Client ID
+        scope: ['openid', 'profile', 'email'],
+      },
+      facebook: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://www.facebook.com/v10.0/dialog/oauth',
+          token: 'https://graph.facebook.com/v10.0/oauth/access_token',
+          userInfo: 'https://graph.facebook.com/me?fields=id,name,email',
+          logout: 'https://www.facebook.com/logout.php',
+        },
+        responseType: 'token',
+        redirectUri: 'http://localhost:3000/auth/callback',
+        clientId: 'YOUR_FACEBOOK_APP_ID', // replace with your Facebook App ID
+        scope: ['public_profile', 'email'],
+      },
+    },
   },
 }

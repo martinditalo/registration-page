@@ -17,7 +17,6 @@ html,
 body {
   height: 1297px;
   margin: 0;
-  background: rgb(151, 42, 177);
   background: linear-gradient(
     0deg,
     rgba(151, 42, 177, 1) 0%,
